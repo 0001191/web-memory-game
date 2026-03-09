@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>3×3 记忆配对游戏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app" v-cloak>
+    <div v-if="screen === 'intro'" class="intro">
+      <h1>3×3 记忆配对游戏</h1>
+      <div class="hero-image" aria-hidden="true"></div>
+      <p class="subtitle">考验你的瞬间记忆力，找到所有颜色配对！</p>
+      <button class="primary-btn" @click="startGame">开始游戏</button>
+    </div>
+
+    <div v-else class="game-screen">
+      <h1>3×3 记忆配对游戏</h1>
+      <button class="primary-btn small" @click="restartGame">重新开始</button>
+      <div class="grid">
+        <div
+          v-for="(card, index) in cards"
+          :key="card.id"
+          class="card"
+          :class="{ matched: card.matched, dummy: card.dummy }"
+          :style="{ backgroundColor: cardBackground(card) }"
+          @click="handleCardClick(index)"
+        ></div>
+      </div>
+    </div>
+
+    <audio ref="bgm" src="bgm.mp3" loop></audio>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
